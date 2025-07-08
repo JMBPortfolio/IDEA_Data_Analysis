@@ -5,7 +5,7 @@ filename = input("Enter CSV filename (e.g., file1.csv): ").strip()
 if not filename.endswith(".csv"):
     filename += ".csv"
 
-# read and sort the csv file
+# read and sort the csv file, strip grant totals to convert to float
 states_grants = []
 with open(filename, newline="") as f:
     for row in csv.DictReader(f):
