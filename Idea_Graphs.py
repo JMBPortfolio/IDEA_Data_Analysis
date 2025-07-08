@@ -1,3 +1,7 @@
+"""
+Idea_Graphs.py
+Reads _Sorted csv, creates a bar graph and saves that new svg
+"""
 filename = input("CSV name (e.g.,data):").strip() + "_Sorted.csv"
 
 #send to pandas
