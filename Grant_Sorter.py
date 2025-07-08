@@ -1,22 +1,26 @@
 import csv
 
-#Prompt user for file name
-filename = input("Enter the CSV filename(e.g., file1.csv): ").strip()
-#make sure format is correct
+# Get user input
+filename = input("Enter CSV filename (e.g., file1.csv): ").strip()
 if not filename.endswith(".csv"):
     filename += ".csv"
-#open the csv file and assign it to reader
-with open(filename, newline="") as file:
-    reader = csv.DictReader(file)
-    #create list to store State name and grant amount
-    states_grants = []
-    #for each row in reader, get the state and grant value
-    for row in reader:
+
+# read and sort the csv file
+states_grants = []
+with open(filename, newline="") as f:
+    for row in csv.DictReader(f):
         state = row["State"]
-        grant = float(row["Grant Total"].replace("$","").replace(",",""))
-        #store these values in states_grants
-        states_grants.append((state,grant))
-    #create a temporary list for each "state, grant" pair, sort by grants
-    for state, grant in sorted(states_grants, key = lambda pair: pair[1]):
-        #print "state: $grant"
-        print(f"{state}: ${grant:,.2f}")
+        grant = float(row["Grant Total"].replace("$", "").replace(",", ""))
+        states_grants.append((state, grant))
+#store sorted list to be saved in new file
+sorted_data = sorted(states_grants, key=lambda p: p[1])
+
+#Create the new file with "_Sorted"
+new_filename = (filename[:-4] if filename.endswith(".csv") else filename) + "_Sorted.csv"
+with open(new_filename, "w", newline="") as out:
+    writer = csv.writer(out)
+    writer.writerow(["State", "Grant Total"])
+    for state, grant in sorted_data:
+        writer.writerow([state, f"{grant:.2f}"])
+
+print(f"Sorted data saved to {new_filename}")
