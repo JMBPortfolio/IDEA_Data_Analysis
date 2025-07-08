@@ -4,7 +4,7 @@ filename = input("CSV name (e.g.,data):").strip() + "_Sorted.csv"
 import pandas as pd
 df = pd.read_csv(filename)
 
-#convert to float and strip the symbols again JIC
+#convert to float and strip the symbols again JIC (want to make sure it's able to convert to float)
 df["Grant Total"] = df["Grant Total"].astype(float)
 
 #Group and sort in pandas
