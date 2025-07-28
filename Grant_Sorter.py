@@ -4,12 +4,12 @@ Reads a CSV of IDEA grant data, extracts state totals, and saves a sorted list.
 """  
 import csv
 
-# get user input and  add .csv so you don't have to type it
+#get user input and  add .csv so you don't have to type it
 filename = input("Enter CSV filename (e.g., file1.csv): ").strip()
 if not filename.endswith(".csv"):
     filename += ".csv"
 
-# read and sort the csv file, strip grant totals to convert to float
+#read and sort the csv file, strip grant totals to convert to float
 states_grants = []
 with open(filename, newline="") as f:
     for row in csv.DictReader(f):
